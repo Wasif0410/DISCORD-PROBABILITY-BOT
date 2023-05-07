@@ -1,1 +1,1 @@
-# DISCORD-PROBABILITY-BOT
+Program Description: Discord Bot that generates probabilities and currently supports 4 commands: !flip (heads or tails), !roll (roll a die). !choose [name] [name] [name] (picker wheel), !cards (random card).
