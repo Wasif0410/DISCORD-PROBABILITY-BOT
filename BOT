@@ -1,0 +1,49 @@
+import discord
+import responses
+
+
+#method for sending messages
+async def send_message(message, user_message):
+
+    response = responses.handle_response(user_message)
+    await message.channel.send(response)
+    
+
+#method for the dicord bot itself
+def run_discord_bot():
+
+    #set token value 
+    TOKEN = "[YOUR TOKEN HERE]"
+
+    #intents
+    intents = discord.Intents.all()
+    client = discord.Client(intents=intents)
+
+    #create a new event
+    @client.event
+    #default display message on ready
+    async def on_ready():
+        print(f"{client.user} is now running")  
+
+    #new event
+    @client.event
+    #when a message is sent
+    async def on_message(message):
+        #if the message by the user is the same as the bot return nothing
+        if message.author == client.user:
+            return
+        
+        #set values
+        username = str(message.author)
+        user_message = str(message.content)
+        channel = str(message.channel) 
+
+        #display message in python terminal
+        print(f"{username} said: {user_message} {channel}")
+
+        #send message with parameters
+        await send_message(message,user_message)
+
+
+    #run bot with token  
+    client.run(TOKEN)
